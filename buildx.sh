@@ -32,7 +32,7 @@ done
 
 # Get readsb version from latest
 docker pull "${REPO}/${IMAGE}:${LATEST_TAG}"
-VERSION=$(docker run --rm -it --entrypoint SoapySDRUtil "${REPO}/${IMAGE}:${LATEST_TAG}" --info | grep -i 'Lib Version' | cut -d ':' -f 2 | tr -d ' ')
+VERSION=$(docker run --rm -it --entrypoint SoapySDRUtil "${REPO}/${IMAGE}:${LATEST_TAG}" --info | grep -i 'Lib Version' | cut -d ':' -f 2 | tr -d ' ' | tr -d '\r')
 
 # Build & push version-specific
 docker buildx build -t "${REPO}/${IMAGE}:${VERSION}" --compress --push --platform "${PLATFORMS}" .
